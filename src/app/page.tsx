@@ -1,101 +1,71 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+import { ReactNode } from 'react';
+import { Radar } from '@/app/components/Radar';
+import { Heatmap } from '@/app/components/Heatmap';
+import { Donut } from '@/app/components/Donut';
+import { Bar } from '@/app/components/Bar';
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+const Card = ({ children }: { children: ReactNode }) => (
+  <div className="min-h-full bg-stone-50 dark:bg-zinc-800/75 border border-stone-200 dark:border-zinc-700/70 rounded-lg py-4 px-5">
+    {children}
+  </div>
+);
+
+const Home = () => (
+  <div className="p-4">
+    <h1 className="text-center">Chart Evaluations for Entity-X</h1>
+    <p>
+      Based on some articles, github pages and documentation, I created a
+      shortlist of charting libraries for React potentially suited to the
+      project. They all needed to be responsive, work with animations, be
+      performant, and have good documentation. They were Nivo, Recharts,
+      ApexCharts, React Chartjs 2, and Victory.
+    </p>
+
+    <p>
+      I created a series of metrics to evaluate the libraries with, each being
+      scored out of 10. I then assigned weights to each metric to reflect
+      importance. Then with some more research and some shameless GPT usage, I
+      generated scores and a total weighted score for each library.
+    </p>
+
+    <p>
+      The winner was Nivo. Built on D3, it's feature rich, powerful,
+      customisable, with solid responsive and interactive features out the box,
+      and great documentation. The charts below are built with it.{' '}
+      <a href="https://nivo.rocks/" target="_blank" className="link">
+        https://nivo.rocks/
+      </a>{' '}
+    </p>
+
+    <div className="grid grid-cols-1 xl:grid-cols-5 gap-12 items-stretch my-12">
+      <div className="xl:col-span-3 min-h-full">
+        <Card>
+          <h2>Overall winner: Nivo 🏆</h2>
+          <Bar />
+        </Card>
+      </div>
+
+      <div className="xl:col-span-2">
+        <Card>
+          <h2>Metrics and their weightings</h2>
+          <Donut />
+        </Card>
+      </div>
     </div>
-  );
-}
+
+    <h2 className="mt-12 mb-6">Visualisations of the metric scoring</h2>
+
+    <div className="grid grid-cols-1 xl:grid-cols-2 gap-12">
+      <Card>
+        <Radar />
+      </Card>
+      <Card>
+        <Heatmap />
+      </Card>
+    </div>
+  </div>
+);
+
+export default Home;
